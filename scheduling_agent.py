@@ -43,12 +43,35 @@ def get_calendar_availability(query_date):
 
 def send_email(recipient, body, subject):
     return {"status": "sent", "to": recipient, "timestamp": datetime.now().isoformat()}
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+import joblib
 
+# Simulated training/loading of the model
+def analyze_sentiment(text):
+    """
+    Classifies sentiment using a traditional ML pipeline.
+    Returns: 'frustrated', 'neutral', or 'positive'
+    """
+    # In a real scenario, you'd load a pre-trained model:
+    # model = joblib.load('sentiment_model.pkl')
+    
+    # Simple keyword-based logic for this local demo:
+    text_lower = text.lower()
+    if any(word in text_lower for word in ["frustrated", "delay", "too long", "urgent"]):
+        return {"sentiment": "frustrated", "confidence": 0.85}
+    elif any(word in text_lower for word in ["great", "thanks", "perfect"]):
+        return {"sentiment": "positive", "confidence": 0.90}
+    else:
+        return {"sentiment": "neutral", "confidence": 0.70}
+        
 def run_tool(name, inputs):
     if name == "get_calendar_availability":
         return get_calendar_availability(inputs["query_date"])
     elif name == "send_email":
         return send_email(inputs["recipient"], inputs["body"], inputs["subject"])
+    elif name == "analyze_sentiment":
+        return analyze_sentiment(inputs["text"])
     return {"error": f"Unknown tool: {name}"}
 
 # --- The Agentic System Prompt ---
@@ -62,13 +85,13 @@ SYSTEM_PROMPT = """You are an Interview Scheduler Agent. Your goal is to find co
 - FORMAT: Output tool calls clearly or provide a final 'Escalated' or 'Resolved' summary."""
 
 def scheduling_agent(user_request):
-    print(f"\n🚀 Starting Agentic Workflow...")
+    print(f"\n Starting Agentic Workflow...")
     messages = [{"role": "user", "content": user_request}]
     max_steps = 10
     step = 0
 
     response = client.messages.create(
-        model="claude-3-5-sonnet-20240620", # Updated for 2026 compatibility
+        model="claude-3-5-sonnet-20240620",
         max_tokens=2048,
         system=SYSTEM_PROMPT,
         tools=tools,
