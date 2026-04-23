@@ -108,9 +108,9 @@ def scheduling_agent(user_request):
                 print(f"💭 Thought: {block.text}")
             
             if block.type == "tool_use":
-                print(f"🔧 Action: [{block.name}]")
+                print(f"Action: [{block.name}]")
                 result = run_tool(block.name, block.input)
-                print(f"👁️ Observation: {json.dumps(result)}")
+                print(f"Observation: {json.dumps(result)}")
                 
                 tool_results.append({
                     "type": "tool_result",
@@ -130,9 +130,9 @@ def scheduling_agent(user_request):
         )
 
     final_text = "".join([b.text for b in response.content if hasattr(b, "text")])
-    print(f"\n✅ FINAL OUTCOME: {final_text}")
+    print(f"\n FINAL OUTCOME: {final_text}")
     if step >= max_steps:
-        print("⚠️ HARD STOP: Maximum steps reached. Escalating to human.")
+        print(" HARD STOP: Maximum steps reached. Escalating to human.")
 
 # --- Execution ---
 if __name__ == "__main__":
