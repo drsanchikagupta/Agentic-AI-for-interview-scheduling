@@ -20,4 +20,4 @@ To ensure reliability and safety in enterprise environments, the system incorpor
 3.  **Contextual Memory:** By maintaining a message history, the system simulates a stateful experience. In production, this data is persisted to a database, allowing the agent to resume long-running tasks without losing progress.
 
 ### Operational Impact
-This design shifts the paradigm from linear task execution to an **agentic model**. It allows digital workers to autonomously drive outcomes—such as resolving scheduling conflicts—while providing full auditability through detailed reasoning logs. The separation of planning and execution layers ensures the system remains robust even in highly distributed and high-compliance environments.
+This design shifts the paradigm from linear task execution to an **agentic model**. It allows digital workers to autonomously drive outcomes such as resolving scheduling conflicts while providing full auditability through detailed reasoning logs. The separation of planning and execution layers ensures the system remains robust even in highly distributed and high compliance environments.
