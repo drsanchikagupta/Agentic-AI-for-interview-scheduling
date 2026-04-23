@@ -10,7 +10,7 @@ The architecture is built on the **ReAct (Reasoning + Acting)** pattern. This cr
 * **Instrumental Action:** It invokes specific tools, such as calendar lookups or communication modules, to interact with external data.
 * **Critical Observation:** Each tool's output is analyzed to update the system’s internal state before the next step is determined.
 
-
+I’ve architected the agent to use a Modular Perception Layer. Instead of wasting LLM tokens on sentiment, I use a local scikit-learn classifier. This provides the agent with a 'Frustration Score' as metadata. If the score exceeds 0.8, the agent’s logic triggers an automatic escalation to a human recruiter, ensuring we maintain high standards for candidate experience.
 
 ### Key Architectural Guardrails
 To ensure reliability and safety in enterprise environments, the system incorporates three critical control layers:
